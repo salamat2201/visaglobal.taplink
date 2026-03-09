@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Global Visa — Визы за рубеж</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #1565C0;
+      --blue-mid: #1976D2;
+      --blue-light: #42A5F5;
+      --accent: #FFC107;
+      --white: #FFFFFF;
+      --bg: #0D1B2A;
+      --card-bg: rgba(255,255,255,0.06);
+      --card-border: rgba(255,255,255,0.12);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 0 48px;
+      overflow-x: hidden;
+    }
+
+    /* animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(21,101,192,0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 90% 80%, rgba(66,165,245,0.18) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+      padding: 0 20px;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 52px;
+      padding-bottom: 32px;
+      animation: fadeDown 0.7s ease both;
+    }
+
+    .logo-ring {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 4px rgba(66,165,245,0.25), 0 8px 32px rgba(21,101,192,0.5);
+      margin-bottom: 18px;
+    }
+
+    .logo-inner {
+      text-align: center;
+      line-height: 1;
+    }
+
+    .logo-inner .gl {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .logo-inner .visa-big {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .brand {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: 0.3px;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .tagline {
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      line-height: 1.5;
+      max-width: 280px;
+    }
+
+    .tagline strong {
+      color: var(--blue-light);
+      font-weight: 600;
+    }
+
+    /* ── STATS ROW ── */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 20px;
+      animation: fadeDown 0.7s 0.1s ease both;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--white);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 2px;
+    }
+
+    .stat-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.15);
+      align-self: stretch;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin: 32px 0 14px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      padding: 17px 20px;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--white);
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::after {
+      content: '→';
+      position: absolute;
+      right: 20px;
+      font-size: 16px;
+      opacity: 0.4;
+      transition: opacity 0.2s, right 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+    }
+
+    .btn:hover::after {
+      right: 15px;
+      opacity: 0.8;
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    /* WhatsApp */
+    .btn-wa {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%);
+      border-color: rgba(76,175,80,0.35);
+      box-shadow: 0 4px 20px rgba(27,94,32,0.4);
+      animation: fadeUp 0.6s 0.25s ease both;
+    }
+    .btn-wa:hover {
+      background: linear-gradient(135deg, #2E7D32 0%, #388E3C 100%);
+    }
+
+    /* Call */
+    .btn-call {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+      border-color: rgba(66,165,245,0.3);
+      box-shadow: 0 4px 20px rgba(21,101,192,0.45);
+      animation: fadeUp 0.6s 0.35s ease both;
+    }
+    .btn-call:hover {
+      background: linear-gradient(135deg, #1976D2 0%, #1E88E5 100%);
+    }
+
+    /* Instagram */
+    .btn-ig {
+      background: linear-gradient(135deg, #833ab4 0%, #c13584 50%, #e1306c 100%);
+      border-color: rgba(225,48,108,0.3);
+      box-shadow: 0 4px 20px rgba(193,53,132,0.4);
+      animation: fadeUp 0.6s 0.45s ease both;
+    }
+
+    .btn-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .btn-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    .btn-text-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .btn-sub {
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0;
+    }
+
+    /* ── INFO CARD ── */
+    .info-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-top: 8px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      animation: fadeUp 0.6s 0.55s ease both;
+    }
+
+    .info-card p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .info-card p strong {
+      color: var(--blue-light);
+      font-weight: 600;
+    }
+
+    /* ── FLAGS ── */
+    .flags {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.6s ease both;
+    }
+
+    .flag-pill {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
+      padding: 5px 12px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.5px;
+      animation: fadeUp 0.6s 0.65s ease both;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-ring">
+        <div class="logo-inner">
+          <div class="gl">GLOBAL</div>
+          <div class="visa-big">VISA</div>
+        </div>
+      </div>
+      <div class="brand">visa_global_work</div>
+      <div class="tagline">Визы в <strong>Канаду · США · Европу · Англию</strong><br>и другие страны мира 🌍</div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">1000+</div>
+          <div class="stat-label">клиентов</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-num" style="display:flex;align-items:center;gap:4px">
+          <div class="stat">
+            <div class="stat-num">5+ лет</div>
+            <div class="stat-label">на рынке</div>
+          </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <div class="stat-num">10 лет</div>
+          <div class="stat-label">виза в Канаду</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="section-label">Связаться с нами</div>
+
+    <!-- WhatsApp -->
+    <a class="btn btn-wa" href="https://wa.me/77XXXXXXXXX" target="_blank">
+      <div class="btn-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12a11.9 11.9 0 0 0 1.64 6.06L0 24l6.12-1.6A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52zM12 21.94a9.89 9.89 0 0 1-5.03-1.37l-.36-.21-3.73.98.99-3.63-.24-.38A9.93 9.93 0 0 1 2.06 12C2.06 6.5 6.5 2.06 12 2.06c2.66 0 5.16 1.04 7.04 2.92a9.93 9.93 0 0 1 2.9 7.02c0 5.5-4.44 9.94-9.94 9.94zm5.44-7.44c-.3-.15-1.76-.87-2.03-.97s-.47-.15-.67.15-.77.97-.94 1.17-.35.22-.64.07a8.1 8.1 0 0 1-2.38-1.47 8.9 8.9 0 0 1-1.65-2.05c-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52s.2-.3.3-.5.05-.37-.02-.52-.67-1.6-.91-2.19c-.24-.57-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37s-1.03 1.01-1.03 2.47 1.06 2.86 1.2 3.06c.15.2 2.08 3.18 5.04 4.46.71.3 1.26.49 1.69.62.71.22 1.35.19 1.86.12.57-.09 1.76-.72 2.01-1.41s.25-1.29.17-1.41-.27-.21-.57-.36z"/>
+        </svg>
+      </div>
+      <div class="btn-text-group">
+        <span>Написать в WhatsApp</span>
+        <span class="btn-sub">Бесплатная консультация</span>
+      </div>
+    </a>
+
+    <!-- Call -->
+    <a class="btn btn-call" href="tel:+77XXXXXXXXX">
+      <div class="btn-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
+        </svg>
+      </div>
+      <div class="btn-text-group">
+        <span>Позвонить нам</span>
+        <span class="btn-sub">Узнать подробнее об услугах</span>
+      </div>
+    </a>
+
+    <!-- Instagram -->
+    <a class="btn btn-ig" href="https://instagram.com/visa_global_work" target="_blank">
+      <div class="btn-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+        </svg>
+      </div>
+      <div class="btn-text-group">
+        <span>Наш Instagram</span>
+        <span class="btn-sub">@visa_global_work</span>
+      </div>
+    </a>
+
+    <!-- Info -->
+    <div class="info-card">
+      <p>С нами вы сэкономите время, нервы и получите <strong>реальный шанс открыть новые страны</strong> 🌍</p>
+    </div>
+
+    <!-- Flags -->
+    <div class="flags">
+      <span class="flag-pill">🇨🇦 Канада</span>
+      <span class="flag-pill">🇺🇸 США</span>
+      <span class="flag-pill">🇬🇧 Англия</span>
+      <span class="flag-pill">🇪🇺 Европа</span>
+    </div>
+
+    <div class="footer">visa_global_work · 5 лет на рынке</div>
+
+  </div>
+</body>
+</html>
